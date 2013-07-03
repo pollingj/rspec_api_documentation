@@ -42,10 +42,17 @@ module RspecApiDocumentation
 
     def document_example(method, path)
       return unless metadata[:document]
-
+      #puts last_request["tempfile"].inspect
       input = last_request.env["rack.input"]
       input.rewind
+
       request_body = input.read
+      
+      #request_body = request_body.force_encoding(Encoding::UTF_8)
+      #puts request_body
+      
+      request_body = "" unless request_body.index('filename').nil?
+      #request_body = ""
 
       request_metadata = {}
 
